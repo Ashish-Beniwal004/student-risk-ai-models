@@ -1,0 +1,49 @@
+feature,importance
+categorical__Have you ever had suicidal thoughts ?_No,0.4426104
+numeric__Academic Pressure,0.12635821
+numeric__Financial Stress,0.07088896
+numeric__satisfaction_index,0.037056286
+categorical__Dietary Habits_Unhealthy,0.036920115
+numeric__Work/Study Hours,0.03344924
+numeric__Age,0.033084843
+categorical__Dietary Habits_Healthy,0.032487795
+numeric__Study Satisfaction,0.018727414
+numeric__sleep_hours,0.01563905
+numeric__family_history,0.012606082
+numeric__stress_pressure_ratio,0.011289285
+categorical__Degree_MA,0.010992009
+categorical__Degree_BE,0.009038051
+categorical__Degree_ME,0.008591102
+numeric__CGPA,0.0075510293
+categorical__Degree_MCA,0.0069744647
+categorical__Degree_M.Tech,0.0064952527
+categorical__Degree_MSc,0.0062707197
+categorical__Degree_B.Arch,0.005943327
+categorical__Degree_LLM,0.005930722
+categorical__Degree_MBBS,0.005817529
+categorical__Degree_BHM,0.0055822744
+categorical__Degree_LLB,0.0055381116
+categorical__Dietary Habits_Moderate,0.005454712
+categorical__Degree_Class 12,0.0051653828
+categorical__Degree_B.Com,0.0050634043
+categorical__Degree_B.Ed,0.005055527
+categorical__Degree_B.Pharm,0.005051226
+categorical__Degree_BCA,0.0048329025
+categorical__Gender_Female,0.004608771
+categorical__Degree_BSc,0.0045852237
+categorical__Degree_MD,0.0043405984
+categorical__Gender_Male,0.0
+categorical__Dietary Habits_Others,0.0
+categorical__Degree_M.Ed,0.0
+categorical__Degree_B.Tech,0.0
+categorical__Degree_M.Com,0.0
+categorical__Degree_BA,0.0
+categorical__Degree_BBA,0.0
+categorical__Degree_M.Pharm,0.0
+categorical__Degree_MBA,0.0
+categorical__Degree_Others,0.0
+categorical__Degree_MHM,0.0
+categorical__Degree_PhD,0.0
+categorical__Have you ever had suicidal thoughts ?_Yes,0.0
+categorical__Family History of Mental Illness_No,0.0
+categorical__Family History of Mental Illness_Yes,0.0

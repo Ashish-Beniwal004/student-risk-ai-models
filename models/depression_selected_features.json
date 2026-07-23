@@ -1,0 +1,19 @@
+{
+  "selected_features": [
+    "Gender",
+    "Age",
+    "Academic Pressure",
+    "CGPA",
+    "Study Satisfaction",
+    "Sleep Duration",
+    "Dietary Habits",
+    "Degree",
+    "Have you ever had suicidal thoughts ?",
+    "Work/Study Hours",
+    "Financial Stress",
+    "Family History of Mental Illness",
+    "sleep_hours",
+    "satisfaction_index",
+    "stress_pressure_ratio"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "accuracy": 0.844472316789106,
+  "precision": 0.8415142018618884,
+  "recall": 0.8364329311046446,
+  "f1": 0.8386405363561993,
+  "classification_report": {
+    "0": {
+      "precision": 0.8273674671499773,
+      "recall": 0.7894509295287505,
+      "f1-score": 0.8079646017699115,
+      "support": 2313.0
+    },
+    "1": {
+      "precision": 0.8556609365737996,
+      "recall": 0.8834149326805385,
+      "f1-score": 0.8693164709424872,
+      "support": 3268.0
+    },
+    "accuracy": 0.844472316789106,
+    "macro avg": {
+      "precision": 0.8415142018618884,
+      "recall": 0.8364329311046446,
+      "f1-score": 0.8386405363561993,
+      "support": 5581.0
+    },
+    "weighted avg": {
+      "precision": 0.8439349385846756,
+      "recall": 0.844472316789106,
+      "f1-score": 0.8438896883952435,
+      "support": 5581.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      1826,
+      487
+    ],
+    [
+      381,
+      2887
+    ]
+  ],
+  "roc_auc": 0.9193498669909475,
+  "cross_validation_score": 0.8718416772302245,
+  "dataset_path": "C:\\Users\\LENOVO\\OneDrive - JK LAKSHMIPAT UNIVERSITY\\Desktop\\ml model ss26 hackthone\\student-risk-ai\\data\\raw\\student_depression\\Student Depression Dataset.csv",
+  "n_samples": 27901,
+  "n_features": 15,
+  "best_parameters": {
+    "subsample": 0.7,
+    "n_estimators": 100,
+    "min_child_weight": 5,
+    "max_depth": 3,
+    "learning_rate": 0.1,
+    "gamma": 0,
+    "colsample_bytree": 1.0
+  }
+}

@@ -1,0 +1,19 @@
+[
+  "numeric__age",
+  "numeric__exam_pressure",
+  "numeric__academic_performance",
+  "numeric__stress_level",
+  "numeric__anxiety_score",
+  "numeric__physical_activity",
+  "numeric__social_support",
+  "numeric__internet_usage",
+  "numeric__family_expectation",
+  "numeric__burnout_score",
+  "numeric__mental_health_index",
+  "numeric__lifestyle_score",
+  "numeric__stress_balance",
+  "numeric__financial_risk_index",
+  "categorical__gender_Female",
+  "categorical__gender_Male",
+  "categorical__gender_Other"
+]

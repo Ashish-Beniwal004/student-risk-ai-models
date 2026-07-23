@@ -1,0 +1,14 @@
+[
+  "numeric__tuition_up_to_date",
+  "numeric__scholarship_holder",
+  "numeric__age",
+  "numeric__gender",
+  "numeric__approved_sem1",
+  "numeric__grade_sem1",
+  "numeric__approved_sem2",
+  "numeric__grade_sem2",
+  "numeric__semester_improvement",
+  "numeric__academic_performance_index",
+  "numeric__semester_success_ratio",
+  "numeric__average_semester_grade"
+]

@@ -1,0 +1,70 @@
+{
+  "accuracy": 0.753688989784336,
+  "precision": 0.6932836807584213,
+  "recall": 0.6660490529345248,
+  "f1": 0.6740813899821068,
+  "classification_report": {
+    "0": {
+      "precision": 0.7854330708661418,
+      "recall": 0.9027149321266968,
+      "f1-score": 0.84,
+      "support": 442.0
+    },
+    "1": {
+      "precision": 0.48672566371681414,
+      "recall": 0.34810126582278483,
+      "f1-score": 0.4059040590405904,
+      "support": 158.0
+    },
+    "2": {
+      "precision": 0.8076923076923077,
+      "recall": 0.7473309608540926,
+      "f1-score": 0.7763401109057301,
+      "support": 281.0
+    },
+    "accuracy": 0.753688989784336,
+    "macro avg": {
+      "precision": 0.6932836807584213,
+      "recall": 0.6660490529345248,
+      "f1-score": 0.6740813899821068,
+      "support": 881.0
+    },
+    "weighted avg": {
+      "precision": 0.7389621006261404,
+      "recall": 0.753688989784336,
+      "f1-score": 0.74184382802829,
+      "support": 881.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      399,
+      25,
+      18
+    ],
+    [
+      71,
+      55,
+      32
+    ],
+    [
+      38,
+      33,
+      210
+    ]
+  ],
+  "roc_auc": 0.8634936512960468,
+  "cross_validation_score": 0.6609642843217797,
+  "dataset_path": "C:\\Users\\LENOVO\\OneDrive - JK LAKSHMIPAT UNIVERSITY\\Desktop\\ml model ss26 hackthone\\student-risk-ai\\data\\raw\\uci_refined.csv",
+  "n_samples": 4405,
+  "n_features": 12,
+  "best_parameters": {
+    "subsample": 0.7,
+    "n_estimators": 300,
+    "min_child_weight": 1,
+    "max_depth": 3,
+    "learning_rate": 0.05,
+    "gamma": 1,
+    "colsample_bytree": 0.6
+  }
+}

@@ -1,0 +1,17 @@
+[
+  "numeric__age",
+  "numeric__academic_year",
+  "numeric__exam_pressure",
+  "numeric__academic_performance",
+  "numeric__anxiety_score",
+  "numeric__depression_score",
+  "numeric__sleep_hours",
+  "numeric__physical_activity",
+  "numeric__social_support",
+  "numeric__screen_time",
+  "numeric__internet_usage",
+  "numeric__financial_stress",
+  "numeric__burnout_score",
+  "numeric__lifestyle_score",
+  "numeric__financial_risk_index"
+]

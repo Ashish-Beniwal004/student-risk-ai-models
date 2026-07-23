@@ -1,0 +1,13 @@
+feature,importance
+numeric__approved_sem2,0.25745773
+numeric__semester_success_ratio,0.19372226
+numeric__tuition_up_to_date,0.13615222
+numeric__grade_sem2,0.07306312
+numeric__approved_sem1,0.06337099
+numeric__scholarship_holder,0.060683113
+numeric__age,0.04599631
+numeric__average_semester_grade,0.04379218
+numeric__gender,0.035143167
+numeric__academic_performance_index,0.031126887
+numeric__grade_sem1,0.030223051
+numeric__semester_improvement,0.029268946

@@ -1,0 +1,70 @@
+{
+  "accuracy": 0.99883,
+  "precision": 0.9982281264133542,
+  "recall": 0.9987273945035334,
+  "f1": 0.9984747965886672,
+  "classification_report": {
+    "0": {
+      "precision": 0.9999934684920054,
+      "recall": 0.9985260453012803,
+      "f1-score": 0.9992592181651454,
+      "support": 153329.0
+    },
+    "1": {
+      "precision": 0.9946909107480575,
+      "recall": 0.9999770931164815,
+      "f1-score": 0.9973269973269974,
+      "support": 43655.0
+    },
+    "2": {
+      "precision": 1.0,
+      "recall": 0.9976790450928382,
+      "f1-score": 0.9988381742738589,
+      "support": 3016.0
+    },
+    "accuracy": 0.99883,
+    "macro avg": {
+      "precision": 0.9982281264133542,
+      "recall": 0.9987273945035334,
+      "f1-score": 0.9984747965886672,
+      "support": 200000.0
+    },
+    "weighted avg": {
+      "precision": 0.9988361511955857,
+      "recall": 0.99883,
+      "f1-score": 0.998831113319818,
+      "support": 200000.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      153103,
+      226,
+      0
+    ],
+    [
+      1,
+      43654,
+      0
+    ],
+    [
+      0,
+      7,
+      3009
+    ]
+  ],
+  "roc_auc": 0.9999949634640193,
+  "cross_validation_score": 0.9981972088675529,
+  "dataset_path": "C:\\Users\\LENOVO\\OneDrive - JK LAKSHMIPAT UNIVERSITY\\Desktop\\ml model ss26 hackthone\\student-risk-ai\\data\\raw\\student_mental_health_burnout_1M.csv",
+  "n_samples": 1000000,
+  "n_features": 15,
+  "best_parameters": {
+    "subsample": 1.0,
+    "n_estimators": 100,
+    "min_child_weight": 1,
+    "max_depth": 5,
+    "learning_rate": 0.1,
+    "gamma": 3,
+    "colsample_bytree": 1.0
+  }
+}
