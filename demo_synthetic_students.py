@@ -1,6 +1,4 @@
 """
-demo_synthetic_students.py
-
 Builds 2-3 hand-crafted synthetic student profiles and runs them through
 the full Phase 1 pipeline end-to-end: raw features -> engineered features
 -> model scoring -> fused risk score.
