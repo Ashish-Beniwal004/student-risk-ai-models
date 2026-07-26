@@ -1,0 +1,83 @@
+{
+  "_note": "PLACEHOLDER CONTENT for hackathon demo. Replace with real institutional resources, contacts, and policies before any production use. Each entry has a 'tier' field so the RAG retriever can filter to tier-appropriate resources.",
+
+  "entries": [
+    {
+      "id": "res_001",
+      "tier": 1,
+      "title": "Study Skills Workshop Series",
+      "content": "The institute offers a free weekly Study Skills Workshop covering time management, active recall, and exam preparation techniques. Sessions run every Wednesday, 4-5 PM, in the Learning Commons. No registration required - drop in anytime.",
+      "tags": ["study skills", "time management", "exam prep"]
+    },
+    {
+      "id": "res_002",
+      "tier": 1,
+      "title": "Peer Tutoring Program",
+      "content": "Students can book a free 1-on-1 peer tutoring session for any core subject through the Academic Support portal. Sessions are 45 minutes and can be booked up to 3 times per week. Tutors are senior students trained by the academic department.",
+      "tags": ["tutoring", "academic support", "subject help"]
+    },
+    {
+      "id": "res_003",
+      "tier": 1,
+      "title": "Structured Backlog Roadmap Template",
+      "content": "For students falling behind on coursework, a structured recovery roadmap breaks pending topics into weekly manageable chunks, prioritized by upcoming assessment weight and prerequisite dependencies, with built-in review checkpoints.",
+      "tags": ["backlog", "roadmap", "catching up", "planning"]
+    },
+    {
+      "id": "res_004",
+      "tier": 2,
+      "title": "Emergency Financial Aid Fund",
+      "content": "The institute's Emergency Financial Aid Fund provides need-based grants of up to a set amount per semester for students facing sudden financial hardship, including fee payment difficulty. Applications are reviewed within 5 working days by the Student Welfare Office. No repayment required.",
+      "tags": ["financial aid", "scholarship", "fee crisis", "grant"]
+    },
+    {
+      "id": "res_005",
+      "tier": 2,
+      "title": "Merit and Need-Based Scholarship Matching",
+      "content": "Students facing financial stress can be matched to relevant scholarships based on academic standing, family income bracket, and program of study. The matching tool cross-references the institute's active scholarship database and flags eligible options with application deadlines.",
+      "tags": ["scholarship matching", "financial stress", "eligibility"]
+    },
+    {
+      "id": "res_006",
+      "tier": 2,
+      "title": "Student Counseling Center - Booking a Session",
+      "content": "The Student Counseling Center offers confidential 1-on-1 sessions with licensed campus psychologists. Students can self-refer or be referred through this system. First appointments are typically available within 3 working days. Sessions are free for enrolled students.",
+      "tags": ["psychologist", "counseling", "mental health", "referral"]
+    },
+    {
+      "id": "res_007",
+      "tier": 2,
+      "title": "Academic Probation Support Plan",
+      "content": "Students showing early signs of academic difficulty (grade decline, missed assessments) can opt into a structured support plan involving a dedicated academic advisor, biweekly check-ins, and adjusted workload pacing where institutionally permitted.",
+      "tags": ["academic support", "advisor", "grade decline"]
+    },
+    {
+      "id": "res_008",
+      "tier": 3,
+      "title": "Faculty Advisor Notification Protocol",
+      "content": "When a student's risk indicators persist despite Tier 1/2 support, their assigned faculty advisor is notified with a summary of the risk pattern (attendance, academic performance, or wellbeing signals) and invited to a brief check-in conversation with the student.",
+      "tags": ["faculty notification", "advisor escalation"]
+    },
+    {
+      "id": "res_009",
+      "tier": 3,
+      "title": "Parent/Guardian Contact Protocol",
+      "content": "For students under 18 or those who have opted into family involvement, a parent/guardian contact on file is notified with a general wellbeing update and invited to a joint conversation with the academic advisor. This step always requires counsellor review before contact is made.",
+      "tags": ["parent contact", "guardian", "family involvement"]
+    },
+    {
+      "id": "res_010",
+      "tier": 4,
+      "title": "Dean of Student Affairs Escalation",
+      "content": "PLACEHOLDER: For sustained, high-severity risk cases (score 40+), the Dean of Student Affairs office is notified for institutional-level review and coordinated response, which may include academic accommodations, welfare checks, or connecting the student with external support services.",
+      "tags": ["dean", "institutional authority", "high severity"]
+    },
+    {
+      "id": "res_011",
+      "tier": 4,
+      "title": "Campus Safety and Crisis Response Coordination",
+      "content": "PLACEHOLDER: In acute cases, the system flags the case for the campus safety/crisis response team, who coordinate with the counseling center and, where appropriate, external emergency services. This step always requires human counsellor sign-off before initiation - see guardrails module.",
+      "tags": ["crisis response", "campus safety", "emergency"]
+    }
+  ]
+}
