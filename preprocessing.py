@@ -68,6 +68,8 @@ def _map_sleep_duration(duration: Optional[str]) -> float:
 
 
 def encode_dropout_target(df: pd.DataFrame) -> pd.DataFrame:
+    # NOTE for risk_fusion.py: "Dropout" = class index 2.
+    # Do not assume index 0 — that is "Graduate" (lowest risk).
     mapping = {"Graduate": 0, "Enrolled": 1, "Dropout": 2}
     data = df.copy()
     data["target_encoded"] = data["target"].map(mapping)
@@ -75,6 +77,9 @@ def encode_dropout_target(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def encode_wellbeing_target(df: pd.DataFrame) -> pd.DataFrame:
+    # NOTE for risk_fusion.py: highest risk = class index 2 in BOTH branches
+    # below ("High" risk_level, or lowest mental_health_index bucket).
+    # Do not assume index 0 — that is the lowest-risk class in both paths.
     data = df.copy()
     if "risk_level" in data.columns:
         mapping = {"Low": 0, "Medium": 1, "High": 2}
@@ -91,6 +96,9 @@ def encode_wellbeing_target(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def encode_depression_target(df: pd.DataFrame) -> pd.DataFrame:
+    # NOTE for risk_fusion.py: "has depression" = class index 1 under
+    # both paths below (numeric Depression column, or "Yes"/"No" text
+    # encoded alphabetically via pd.Categorical -> "No"=0, "Yes"=1).
     data = df.copy()
     if data["Depression"].dtype == object:
         data["target_encoded"] = pd.Categorical(data["Depression"]).codes
