@@ -178,11 +178,19 @@ def get_pending_actions() -> list[ActionRecord]:
             entry = json.loads(line)
             latest_by_id[entry["action_id"]] = entry  # later lines overwrite earlier ones
 
-    pending = [
-        ActionRecord(**entry)
-        for entry in latest_by_id.values()
-        if entry["status"] == ActionStatus.PENDING_REVIEW.value
-    ]
+    pending = []
+    for entry in latest_by_id.values():
+        if entry["status"] != ActionStatus.PENDING_REVIEW.value:
+            continue
+        # json.dumps wrote these as plain strings (since ActionType/ActionStatus
+        # are str-based enums) - convert them back to real enum members here,
+        # otherwise .value calls downstream (e.g. in review_action_cli) fail
+        # with AttributeError on a plain str.
+        entry = dict(entry)
+        entry["action_type"] = ActionType(entry["action_type"])
+        entry["status"] = ActionStatus(entry["status"])
+        pending.append(ActionRecord(**entry))
+
     return pending
 
 
@@ -244,10 +252,16 @@ if __name__ == "__main__":
     )
     print(f"Action 3 ({action_3.action_type.value}) status: {action_3.status.value}")
 
-    print(f"\n{len(get_pending_actions())} action(s) currently pending review.")
+    submitted_this_run = [action_1, action_2, action_3]
+    pending_this_run = [a for a in submitted_this_run if a.status == ActionStatus.PENDING_REVIEW]
+
+    print(f"\n{len(pending_this_run)} action(s) from this run need review.")
+    print("(Note: audit_log.jsonl may also contain older pending actions from "
+          "previous runs - those aren't reviewed here. Use get_pending_actions() "
+          "separately, e.g. in a real dashboard, to see the full backlog.)\n")
     print("Run the CLI review step now:\n")
 
-    for pending in get_pending_actions():
+    for pending in pending_this_run:
         review_action_cli(pending, reviewer="demo_counsellor")
 
     print(f"\nAudit log written to: {AUDIT_LOG_PATH}")
