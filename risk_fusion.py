@@ -17,19 +17,18 @@ from typing import Optional
 
 import numpy as np
 
-from utils import load_pickle  # assumes a load_pickle helper exists in utils.py;
-                                 # add one if it doesn't (mirrors save_pickle)
+from utils import load_pickle  # confirmed present in utils.py (joblib-backed)
 
 
 # ---------------------------------------------------------------------------
 # CLASS INDEX CONSTANTS
-# TODO: Confirm each of these against the corresponding encode_*_target()
-# function in preprocessing.py before relying on this in production.
-# Getting these wrong silently inverts the risk score.
+# Confirmed against the encode_*_target() functions in preprocessing.py.
+# Getting these wrong silently inverts the risk score, so do not change
+# without re-checking preprocessing.py's mapping first.
 # ---------------------------------------------------------------------------
-DROPOUT_CLASS_INDEX = 0     # CONFIRM: which index = "Dropout" in encode_dropout_target()
-WELLBEING_CLASS_INDEX = 0   # CONFIRM: which index = highest-risk class in encode_wellbeing_target()
-DEPRESSION_CLASS_INDEX = 1  # binary:logistic — CONFIRM index 1 = "at risk" in encode_depression_target()
+DROPOUT_CLASS_INDEX = 2     # confirmed: "Dropout" = 2 in {"Graduate":0, "Enrolled":1, "Dropout":2}
+WELLBEING_CLASS_INDEX = 2   # confirmed: highest-risk class = 2 in both encode_wellbeing_target() paths
+DEPRESSION_CLASS_INDEX = 1  # confirmed: "has depression" = 1 under both dtype paths in encode_depression_target()
 
 
 def _load_model_and_preprocessor(models_dir: str, prefix: str):
