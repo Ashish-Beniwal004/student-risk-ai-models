@@ -21,7 +21,7 @@
       "tier": 1,
       "title": "Structured Backlog Roadmap Template",
       "content": "For students falling behind on coursework, a structured recovery roadmap breaks pending topics into weekly manageable chunks, prioritized by upcoming assessment weight and prerequisite dependencies, with built-in review checkpoints.",
-      "tags": ["backlog", "roadmap", "catching up", "planning"]
+      "tags": ["backlog", "roadmap", "catching up", "planning", "falling behind", "overwhelmed", "behind on everything", "struggling", "too much work"]
     },
     {
       "id": "res_004",
@@ -42,7 +42,7 @@
       "tier": 2,
       "title": "Student Counseling Center - Booking a Session",
       "content": "The Student Counseling Center offers confidential 1-on-1 sessions with licensed campus psychologists. Students can self-refer or be referred through this system. First appointments are typically available within 3 working days. Sessions are free for enrolled students.",
-      "tags": ["psychologist", "counseling", "mental health", "referral"]
+      "tags": ["psychologist", "counseling", "mental health", "referral", "overwhelmed", "stressed", "burnt out", "feeling down", "struggling emotionally", "anxious"]
     },
     {
       "id": "res_007",

@@ -66,20 +66,39 @@ class ResourceRetriever:
         query: str,
         max_tier: int,
         top_k: int = 3,
+        primary_driver: Optional[str] = None,
     ) -> list[dict]:
         """
         Returns up to top_k resource entries most relevant to `query`,
         restricted to entries with tier <= max_tier (a Tier 3 student
         can still see Tier 1/2 self-help resources alongside escalation
         content; a Tier 1 student never sees Tier 3/4 content).
+
+        `primary_driver` (e.g. "wellbeing_score", "dropout_score",
+        "depression_score") is optional structured signal from
+        routing.RiskTierResult. It's appended to the retrieval query
+        (not the query itself) to bias matching toward the right
+        resource category even when the student's own wording shares
+        few literal words with the knowledge base - which is common,
+        since students write casually ("feeling overwhelmed") while
+        resource descriptions are written formally.
         """
+        expansion_terms = {
+            "dropout_score": "academic backlog behind falling coursework catching up",
+            "wellbeing_score": "stressed overwhelmed burnt out struggling anxious",
+            "depression_score": "counseling mental health support struggling emotionally",
+        }
+        expanded_query = query
+        if primary_driver and primary_driver in expansion_terms:
+            expanded_query = f"{query} {expansion_terms[primary_driver]}"
+
         eligible_indices = [
             i for i, e in enumerate(self.entries) if e["tier"] <= max_tier
         ]
         if not eligible_indices:
             return []
 
-        query_vec = self.vectorizer.transform([query])
+        query_vec = self.vectorizer.transform([expanded_query])
         eligible_matrix = self.matrix[eligible_indices]
         similarities = cosine_similarity(query_vec, eligible_matrix).flatten()
 
@@ -230,7 +249,11 @@ if __name__ == "__main__":
     print(f"Tier: {tier_result.tier} - {tier_result.tier_label}\n")
 
     student_query = "I've been feeling really overwhelmed and behind on everything lately."
-    resources = retriever.retrieve(student_query, max_tier=tier_result.tier)
+    resources = retriever.retrieve(
+        student_query,
+        max_tier=tier_result.tier,
+        primary_driver=tier_result.primary_driver,
+    )
 
     print("Retrieved resources:")
     for r in resources:
