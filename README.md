@@ -73,6 +73,10 @@ The three models are trained on three separate, unrelated public datasets (UCI d
 
 | Layer | Technology |
 |---|---|
+| Frontend Components | React.js, Vite, Space Grotesk Typography, Cyber Dark Glassmorphism CSS |
+| Application API | Node.js, Express.js REST architecture |
+| Database | MongoDB, Mongoose ODM (Users, Notifications) |
+| System ML Service | Flask & flask-cors, transforming models into live inference REST endpoints |
 | Risk classifiers | XGBoost (3 independently trained models), scikit-learn preprocessing pipelines |
 | Explainability | SHAP (per-model feature importance, `/shap`, `/feature_importance`) |
 | Feature engineering | pandas, scikit-learn `ColumnTransformer` |
@@ -88,6 +92,9 @@ The three models are trained on three separate, unrelated public datasets (UCI d
 
 ```
 student-risk-ai-models/
+├── backend/                         # Express.js Node API, MongoDB schemas & controllers
+├── frontend/                        # React.js Vite Frontend (Dashboards & Simulator)
+├── app.py                           # Flask backend bridging ML inference with Express
 ├── data/raw/                        # Training datasets (UCI, wellbeing, depression)
 ├── models/                          # Trained model + preprocessor pickles (joblib)
 ├── feature_importance/              # Per-model feature importance CSVs
@@ -150,7 +157,14 @@ $env:ANTHROPIC_API_KEY = "your-key-here"
 
 ### 4. Run the pipeline
 
-**Score three example students end-to-end and see individual + fused risk scores:**
+**Start the full-stack MERN + AI Pipeline application:**
+Open three separate terminals and run the following to boot the Data, API, and Interface layers:
+1. `npm run dev` inside `/backend` (Runs MongoDB-backed Express Server)
+2. `python app.py` at the root folder (Runs the Flask AI Microservice)
+3. `npm run dev` inside `/frontend` (Runs the React.js web client)
+Then visit `http://localhost:5173` to see the complete application live.
+
+**Score three example students end-to-end and see individual + fused risk scores (Original CLI Demo):**
 ```bash
 python demo_synthetic_students.py
 ```
@@ -232,3 +246,23 @@ We're documenting these explicitly rather than glossing over them, since we thin
 - Verify and, if needed, retrain the wellbeing model to remove the target-leakage-style fallback
 - Real scheduler integration for the weekly batch run
 - Optional, consent-gated CV/OCR enhancement modules
+
+---
+
+## Phase 2: Full-Stack Web Application (MERN)
+
+The original MVP Python machine learning pipeline has now been integrated into a complete MERN stack web application with the following additions:
+
+### New Architecture Layers
+- **Express / Node.js Backend**: A secure REST API that brokers interactions between the frontend, the MongoDB database, and the Flask ML inference service. Features JWT authentication, role-based middleware, and custom alert orchestration.
+- **React + Vite Frontend**: A modern, interactive web interface utilizing a premium "Cyber Dark Glassmorphism" aesthetic. Contains custom hooks, context providers, and responsive role-based layouts.
+- **MongoDB Database**: Persistent storage for Users (Students, Teachers, Authorities) and Notifications, complete with a seeder script (`backend/seed.js`) to instantly populate the environment.
+
+### Key Web Features
+- **Role-Based Access & Dashboards**:
+  - `STUDENT`: Views their personal notifications and overall academic standing.
+  - `TEACHER`: Monitors their assigned classes, issues warnings, and manages interventions.
+  - `AUTHORITY`: System-wide analytics and top-level intervention tracking.
+- **Live AI Simulator Modal**: A frontend component where Teachers and Authorities can input potential student variables (Attendance, CGPA, etc.) to simulate risk. Includes an **Assigned Mode** that allows them to run the AI prediction strictly on a specific student via their email and department.
+- **Automated Alerting**: If an assigned prediction runs successfully, the system immediately computes the result and dispatches a persistent database notification directly to the matched student's dashboard.
+

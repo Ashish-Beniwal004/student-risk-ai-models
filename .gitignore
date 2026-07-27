@@ -39,3 +39,7 @@ Thumbs.db
 *.ckpt
 # Large datasets
 data/raw/student_mental_health_burnout_1M.csv
+# Node.js
+node_modules/
+dist/
+build/
