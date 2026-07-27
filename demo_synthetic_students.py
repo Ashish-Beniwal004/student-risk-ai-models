@@ -1,4 +1,6 @@
 """
+demo_synthetic_students.py
+
 Builds 2-3 hand-crafted synthetic student profiles and runs them through
 the full Phase 1 pipeline end-to-end: raw features -> engineered features
 -> model scoring -> fused risk score.
@@ -147,15 +149,15 @@ student_1_depression_raw = {
 # STUDENT 2: Medium risk — declining grades, moderate financial stress
 # ---------------------------------------------------------------------------
 student_2_dropout_raw = {
-    "admission_grade": 12.0,
-    "tuition_up_to_date": 0,
+    "admission_grade": 13.0,
+    "tuition_up_to_date": 1,
     "scholarship_holder": 0,
-    "age": 21,
+    "age": 20,
     "gender": 1,
-    "approved_sem1": 5,
-    "grade_sem1": 11.5,
-    "approved_sem2": 3,
-    "grade_sem2": 9.8,
+    "approved_sem1": 6,
+    "grade_sem1": 12.5,
+    "approved_sem2": 5,
+    "grade_sem2": 11.8,
 }
 
 student_2_wellbeing_raw = {
@@ -181,19 +183,19 @@ student_2_wellbeing_raw = {
 
 student_2_depression_raw = {
     "Gender": "Male",
-    "Age": 21,
-    "Academic Pressure": 4,
+    "Age": 20,
+    "Academic Pressure": 3,
     "Work Pressure": 1,
-    "CGPA": 6.2,
-    "Study Satisfaction": 2,
+    "CGPA": 7.0,
+    "Study Satisfaction": 3,
     "Job Satisfaction": 0,
     "Dietary Habits": "Moderate",
     "Degree": "B.Sc",
     "Have you ever had suicidal thoughts ?": "No",
-    "Work/Study Hours": 8,
-    "Financial Stress": 4,
-    "Family History of Mental Illness": "Yes",
-    "Sleep Duration": "5-6 hours",
+    "Work/Study Hours": 6,
+    "Financial Stress": 3,
+    "Family History of Mental Illness": "No",
+    "Sleep Duration": "7-8 hours",
 }
 
 
