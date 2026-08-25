@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { User, Mail, Lock, Shield, Building2 } from "lucide-react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useAuth } from "../contexts/AuthContext";
 
@@ -19,11 +19,14 @@ const TEST_CREDENTIALS = [
 export default function Register() {
   const { register, isAuthenticated, user } = useAuth();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const initialRole = searchParams.get("role") || "STUDENT";
+
   const [form, setForm] = useState({
     name: "",
     email: "",
     password: "",
-    role: "STUDENT",
+    role: initialRole,
     department: "Computer Science",
   });
   const [loading, setLoading] = useState(false);

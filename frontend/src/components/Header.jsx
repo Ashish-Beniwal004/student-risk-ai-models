@@ -130,7 +130,7 @@ export default function Header({ onOpenSimulator }) {
           )}
 
           {/* Notification Bell */}
-          <NotificationPanel />
+          {user?.role !== 'STUDENT' && <NotificationPanel />}
 
           {/* User Avatar + Logout */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>

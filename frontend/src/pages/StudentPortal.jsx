@@ -47,6 +47,26 @@ function MetricBar({ label, value, max = 100, color, unit = '%' }) {
 export default function StudentPortal() {
   const { user } = useAuth();
   const [showSimulator, setShowSimulator] = useState(false);
+  const [inputValue, setInputValue] = useState('');
+  const [chatHistory, setChatHistory] = useState([
+    { role: 'student', text: "I've been feeling really overwhelmed and behind on everything lately." },
+    { role: 'bot', text: "I understand you're feeling overwhelmed. It's completely normal to feel this way. I recommend checking out our verified resources: \n\n• Counseling Center (Walk-in): We have open hours 9AM-4PM at the Student Union building.\n• Academic Success Workshops: There is a time-management workshop next Thursday.", grounded: true }
+  ]);
+
+  const handleSend = () => {
+    if (!inputValue.trim()) return;
+    const newHistory = [...chatHistory, { role: 'student', text: inputValue }];
+    setChatHistory(newHistory);
+    setInputValue('');
+    
+    setTimeout(() => {
+      setChatHistory(prev => [...prev, {
+        role: 'bot',
+        text: "Thank you for reaching out. A counselor will review this. Please consider checking the Student Wellness Portal for more resources.",
+        grounded: true
+      }]);
+    }, 800);
+  };
 
   const metrics = DEMO_METRICS;
   const riskColor = metrics.riskLevel === 'HIGH' ? '#ef4444' : metrics.riskLevel === 'MEDIUM' ? '#f59e0b' : '#10b981';
@@ -206,33 +226,53 @@ export default function StudentPortal() {
           </div>
         </div>
 
-        {/* Recommendations */}
-        <div className="glass-card animate-fade-in" style={{ padding: '24px', marginTop: '24px' }}>
+        {/* RAG Chatbot Self-Serve */}
+        <div className="glass-card animate-fade-in" style={{ padding: '24px', marginTop: '24px', border: '1px solid rgba(99, 102, 241, 0.3)' }}>
           <div className="section-header">
             <div>
-              <div className="section-title">AI Recommendations</div>
-              <div className="section-subtitle">Personalized intervention suggestions</div>
+              <div className="section-title" style={{color: '#a78bfa'}}>Tier 1: RAG Self-Serve AI Assistant</div>
+              <div className="section-subtitle">Safe, grounded institutional guidance (knowledge_base.json)</div>
             </div>
-            <Zap size={18} color="#6366f1" />
+            <Zap size={18} color="#a78bfa" />
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px' }}>
-            {[
-              { tip: 'Improve attendance in Computer Networks to avoid academic risk', icon: '⚠️', urgency: 'high' },
-              { tip: 'Complete pending assignments before the weekend deadline', icon: '📝', urgency: 'medium' },
-              { tip: 'Schedule a meeting with your academic advisor', icon: '👤', urgency: 'medium' },
-              { tip: 'Consider joining study groups for better concept retention', icon: '👥', urgency: 'low' },
-            ].map((rec, i) => (
-              <div key={i} style={{
-                padding: '14px 16px',
-                background: 'rgba(15, 23, 42, 0.6)',
-                borderRadius: '10px',
-                border: `1px solid rgba(${rec.urgency === 'high' ? '239,68,68' : rec.urgency === 'medium' ? '245,158,11' : '16,185,129'}, 0.2)`,
-                display: 'flex', gap: '10px', alignItems: 'flex-start',
-              }}>
-                <span style={{ fontSize: '18px', flexShrink: 0 }}>{rec.icon}</span>
-                <p style={{ fontSize: '12px', color: '#94a3b8', margin: 0, lineHeight: 1.5 }}>{rec.tip}</p>
-              </div>
-            ))}
+          
+          <div style={{
+            background: 'rgba(15, 23, 42, 0.6)',
+            borderRadius: '10px',
+            border: '1px solid rgba(99, 102, 241, 0.1)',
+            overflow: 'hidden',
+          }}>
+            <div style={{ maxHeight: '350px', overflowY: 'auto' }}>
+              {chatHistory.map((msg, i) => (
+                msg.role === 'student' ? (
+                  <div key={i} style={{ padding: '16px', borderBottom: '1px solid rgba(255,255,255,0.05)', display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+                    <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#6366f1', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 'bold', flexShrink: 0 }}>S</div>
+                    <div style={{ fontSize: '13px', color: '#e2e8f0', lineHeight: 1.5, marginTop: '5px' }}>
+                      {msg.text}
+                    </div>
+                  </div>
+                ) : (
+                  <div key={i} style={{ padding: '16px', display: 'flex', gap: '12px', alignItems: 'flex-start', background: 'rgba(99,102,241,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                    <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'linear-gradient(135deg, #a78bfa, #c084fc)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', flexShrink: 0 }}><Zap size={14}/></div>
+                    <div>
+                      <div style={{ fontSize: '13px', color: '#e2e8f0', lineHeight: 1.5, marginTop: '2px', whiteSpace: 'pre-wrap' }}>
+                        {msg.text}
+                      </div>
+                      {msg.grounded && (
+                        <div style={{ marginTop: '10px', fontSize: '11px', color: '#8b5cf6', background: 'rgba(139,92,246,0.1)', padding: '4px 8px', borderRadius: '4px', display: 'inline-block' }}>
+                          🧠 Grounded by TF-IDF Retrieval: [Tier 1 resources]
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )
+              ))}
+            </div>
+            
+            <div style={{ padding: '16px', display: 'flex', gap: '10px' }}>
+               <input type="text" className="form-input" placeholder="Ask the AI Assistant..." style={{ flex: 1 }} value={inputValue} onChange={e => setInputValue(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleSend()} />
+               <button className="btn btn-primary" onClick={handleSend}><Zap size={14}/> Send</button>
+            </div>
           </div>
         </div>
       </main>

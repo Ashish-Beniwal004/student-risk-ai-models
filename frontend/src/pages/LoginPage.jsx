@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Zap, Mail, Lock, Eye, EyeOff } from 'lucide-react';
+import { Zap, Mail, Lock, Eye, EyeOff, Shield } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -11,6 +11,7 @@ export default function LoginPage() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [role, setRole] = useState('STUDENT');
   const [showPass, setShowPass] = useState(false);
   const [localError, setLocalError] = useState('');
 
@@ -72,10 +73,29 @@ export default function LoginPage() {
         </div>
 
         <div className="glass-card" style={{ padding: '32px' }}>
-          <h2 style={{ fontSize: '20px', fontWeight: '700', color: '#f1f5f9', marginBottom: '12px', fontFamily: 'Space Grotesk, sans-serif' }}>
+          <h2 style={{ fontSize: '20px', fontWeight: '700', color: '#f1f5f9', marginBottom: '16px', fontFamily: 'Space Grotesk, sans-serif' }}>
             Sign In
           </h2>
+
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            
+            <div className="form-group">
+              <label className="form-label">Login As</label>
+              <div style={{ position: 'relative' }}>
+                <Shield size={15} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#64748b', pointerEvents: 'none' }} />
+                <select
+                  value={role}
+                  onChange={(e) => setRole(e.target.value)}
+                  className="form-input"
+                  style={{ paddingLeft: '38px', appearance: 'none' }}
+                >
+                  <option value="STUDENT">Student</option>
+                  <option value="TEACHER">Teacher</option>
+                  <option value="AUTHORITY">Authority</option>
+                </select>
+              </div>
+            </div>
+
             <div className="form-group">
               <label className="form-label">Email</label>
               <div style={{ position: 'relative' }}>

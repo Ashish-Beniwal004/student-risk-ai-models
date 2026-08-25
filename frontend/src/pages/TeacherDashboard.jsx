@@ -30,11 +30,11 @@ const TREND_DATA = [
 ];
 
 const AT_RISK_STUDENTS = [
-  { name: 'Ravi Kumar', subject: 'Networks', score: 78, level: 'HIGH', trend: 'up' },
-  { name: 'Sneha Patel', subject: 'OS', score: 71, level: 'HIGH', trend: 'up' },
-  { name: 'Amit Joshi', subject: 'Soft. Eng.', score: 64, level: 'MEDIUM', trend: 'down' },
-  { name: 'Divya Nair', subject: 'Data Struct.', score: 58, level: 'MEDIUM', trend: 'stable' },
-  { name: 'Kiran Rao', subject: 'DBMS', score: 52, level: 'MEDIUM', trend: 'down' },
+  { name: 'Ravi Kumar', subject: 'Networks', score: 78, level: 'HIGH', trend: 'up', tier: 4, driver: 'Depression', d: 45, w: 70, dep: 85 },
+  { name: 'Sneha Patel', subject: 'OS', score: 71, level: 'HIGH', trend: 'up', tier: 4, driver: 'Wellbeing', d: 60, w: 88, dep: 65 },
+  { name: 'Amit Joshi', subject: 'Soft. Eng.', score: 64, level: 'MEDIUM', trend: 'down', tier: 3, driver: 'Dropout', d: 80, w: 40, dep: 30 },
+  { name: 'Divya Nair', subject: 'Data Struct.', score: 58, level: 'MEDIUM', trend: 'stable', tier: 3, driver: 'Dropout', d: 70, w: 45, dep: 20 },
+  { name: 'Kiran Rao', subject: 'DBMS', score: 52, level: 'MEDIUM', trend: 'down', tier: 2, driver: 'Wellbeing', d: 30, w: 75, dep: 40 },
 ];
 
 const PIE_DATA = [
@@ -215,7 +215,8 @@ export default function TeacherDashboard() {
                   <th>Student</th>
                   <th>Subject</th>
                   <th>Risk Score</th>
-                  <th>Risk Level</th>
+                  <th>3-Model Breakdown</th>
+                  <th>Tier Level</th>
                   <th>Trend</th>
                   <th>Action</th>
                 </tr>
@@ -243,7 +244,13 @@ export default function TeacherDashboard() {
                       </span>
                     </td>
                     <td>
-                      <span className={`badge badge-${student.level.toLowerCase()}`}>{student.level}</span>
+                      <div style={{ fontSize: '11px', color: '#94a3b8' }}>
+                        <div style={{color: '#a78bfa', fontWeight: 'bold'}}>{student.driver} (Primary)</div>
+                        <div style={{marginTop: '2px'}}>Drop: {student.d} | Well: {student.w} | Dep: {student.dep}</div>
+                      </div>
+                    </td>
+                    <td>
+                      <span className={`badge badge-${student.level.toLowerCase()}`}>Tier {student.tier}</span>
                     </td>
                     <td>
                       {student.trend === 'up' ? <TrendingUp size={16} color="#ef4444" /> :

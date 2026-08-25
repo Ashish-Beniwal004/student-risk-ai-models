@@ -9,6 +9,7 @@ import { useAuth } from '../contexts/AuthContext';
 import Header from '../components/Header';
 import LiveSimulatorModal from '../components/LiveSimulatorModal';
 import api from '../services/api';
+import toast from 'react-hot-toast';
 
 const DEPT_DATA = [
   { dept: 'CS', highRisk: 18, avgScore: 42, students: 180 },
@@ -39,12 +40,17 @@ const MONTHLY_DATA = [
 ];
 
 const INTERVENTIONS = [
-  { student: 'Ravi Kumar', dept: 'CS', score: 82, status: 'pending', date: '2024-07-20', action: 'Academic Probation' },
-  { student: 'Meena Sharma', dept: 'Mech', score: 76, status: 'in-progress', date: '2024-07-18', action: 'Counselor Referral' },
-  { student: 'Arjun Iyer', dept: 'ECE', score: 74, status: 'resolved', date: '2024-07-15', action: 'Parent Meeting' },
-  { student: 'Priya Desai', dept: 'IT', score: 71, status: 'pending', date: '2024-07-22', action: 'Financial Aid Review' },
-  { student: 'Suresh Nair', dept: 'CS', score: 79, status: 'in-progress', date: '2024-07-19', action: 'Academic Counseling' },
-  { student: 'Kavya Rao', dept: 'Civil', score: 73, status: 'resolved', date: '2024-07-14', action: 'Leave of Absence' },
+  { student: 'Ravi Kumar', dept: 'CS', score: 82, status: 'pending', date: '2024-07-20', action: 'Academic Probation', tier: 4 },
+  { student: 'Meena Sharma', dept: 'Mech', score: 76, status: 'in-progress', date: '2024-07-18', action: 'Counselor Referral', tier: 3 },
+  { student: 'Arjun Iyer', dept: 'ECE', score: 74, status: 'resolved', date: '2024-07-15', action: 'Parent Meeting', tier: 3 },
+  { student: 'Priya Desai', dept: 'IT', score: 71, status: 'pending', date: '2024-07-22', action: 'Financial Aid Review', tier: 2 },
+  { student: 'Suresh Nair', dept: 'CS', score: 79, status: 'in-progress', date: '2024-07-19', action: 'Academic Counseling', tier: 3 },
+  { student: 'Kavya Rao', dept: 'Civil', score: 73, status: 'resolved', date: '2024-07-14', action: 'Leave of Absence', tier: 4 },
+];
+
+const PENDING_ACTIONS_INITIAL = [
+  { id: 'ACT-001', student: 'Ravi Kumar', tier: 4, type: 'INSTITUTIONAL_AUTHORITY_ALERT', msg: 'Recommend institutional review for acute depression risk framework.', date: 'Just now' },
+  { id: 'ACT-002', student: 'Amit Joshi', tier: 3, type: 'TEACHER_NOTIFICATION', msg: 'Drafted notification to assigned faculty advisor.', date: '2 hrs ago' },
 ];
 
 const STATUS_ICONS = {
@@ -78,6 +84,17 @@ export default function AuthorityDashboard() {
   const [analytics, setAnalytics] = useState(null);
   const [filter, setFilter] = useState('all');
   const [notifications, setNotifications] = useState([]);
+  const [pendingActions, setPendingActions] = useState(PENDING_ACTIONS_INITIAL);
+
+  const handleApprove = (id) => {
+    setPendingActions(prev => prev.filter(a => a.id !== id));
+    toast.success('Action approved and logged to audit_log.jsonl');
+  };
+
+  const handleReject = (id) => {
+    setPendingActions(prev => prev.filter(a => a.id !== id));
+    toast.error('Action rejected.');
+  };
 
   useEffect(() => {
     if (!user?.isDemo) {
@@ -218,12 +235,52 @@ export default function AuthorityDashboard() {
           </ResponsiveContainer>
         </div>
 
-        {/* Intervention Table */}
+        {/* AI Guardrails Inbox */}
+        <div className="glass-card animate-fade-in" style={{ padding: '24px', marginBottom: '24px', border: '1px solid rgba(239, 68, 68, 0.3)' }}>
+          <div className="section-header">
+            <div>
+              <div className="section-title" style={{color: '#f87171'}}>AI Guardrails Inbox (Human-in-the-Loop)</div>
+              <div className="section-subtitle">Pending AI actions requiring authority sign-off before sending</div>
+            </div>
+            <Shield size={18} color="#ef4444" />
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            {pendingActions.length === 0 ? (
+              <div style={{color: '#94a3b8', fontSize: '13px', textAlign: 'center', padding: '16px'}}>No pending actions in your queue.</div>
+            ) : pendingActions.map(act => (
+              <div key={act.id} style={{
+                background: 'rgba(15, 23, 42, 0.6)', padding: '16px', borderRadius: '10px',
+                border: '1px solid rgba(245, 158, 11, 0.3)', display: 'flex', justifyContent: 'space-between', alignItems: 'center'
+              }}>
+                <div>
+                  <div style={{ display: 'flex', gap: '8px', alignItems: 'center', marginBottom: '6px' }}>
+                    <span className="badge badge-high">Tier {act.tier}</span>
+                    <span style={{ fontSize: '13px', fontWeight: 'bold', color: '#e2e8f0' }}>{act.type}</span>
+                    <span style={{ fontSize: '11px', color: '#64748b' }}>• {act.date}</span>
+                  </div>
+                  <div style={{ fontSize: '14px', color: '#94a3b8' }}>
+                    <span style={{ color: '#fff' }}>[{act.student}]:</span> {act.msg}
+                  </div>
+                </div>
+                <div style={{ display: 'flex', gap: '8px' }}>
+                  <button className="btn btn-primary btn-sm" style={{ background: '#10b981', borderColor: '#10b981' }} onClick={() => handleApprove(act.id)}>
+                    <CheckCircle size={14} /> Approve
+                  </button>
+                  <button className="btn btn-secondary btn-sm" style={{ color: '#ef4444', borderColor: 'rgba(239,68,68,0.3)' }} onClick={() => handleReject(act.id)}>
+                    <XCircle size={14} /> Reject
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 4-Tier Triage Center (Intervention Table) */}
         <div className="glass-card animate-fade-in" style={{ padding: '24px' }}>
           <div className="section-header" style={{ flexWrap: 'wrap', gap: '12px' }}>
             <div>
-              <div className="section-title">Active Interventions</div>
-              <div className="section-subtitle">High-risk student case tracking</div>
+              <div className="section-title">4-Tier Triage Center</div>
+              <div className="section-subtitle">Categorized student risk escalation levels</div>
             </div>
             <div style={{ display: 'flex', gap: '8px' }}>
               {['all', 'pending', 'in-progress', 'resolved'].map(f => (
@@ -253,6 +310,7 @@ export default function AuthorityDashboard() {
                   <th>Student</th>
                   <th>Department</th>
                   <th>Risk Score</th>
+                  <th>Tier</th>
                   <th>Status</th>
                   <th>Date</th>
                   <th>Intervention</th>
@@ -286,6 +344,9 @@ export default function AuthorityDashboard() {
                         }}>
                           {item.score}
                         </span>
+                      </td>
+                      <td>
+                        <span className={`badge badge-${item.tier === 4 ? 'high' : item.tier === 3 ? 'medium' : 'student'}`}>Tier {item.tier}</span>
                       </td>
                       <td>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>

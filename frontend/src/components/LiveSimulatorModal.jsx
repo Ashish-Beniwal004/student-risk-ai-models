@@ -94,11 +94,15 @@ export default function LiveSimulatorModal({ onClose }) {
       const { data } = await api.post('/predict', payload);
       setResult(data);
 
-      toast.success(`Prediction complete: ${data.riskLevel} risk (${data.riskScore.toFixed(1)})`);
+      if (user?.role !== 'STUDENT') {
+        toast.success(`Prediction complete: ${data.riskLevel} risk (${data.riskScore.toFixed(1)})`);
+      }
     } catch (err) {
       const msg = err.response?.data?.message || 'Prediction failed. Ensure the ML service is running.';
       setError(msg);
-      toast.error(msg);
+      if (user?.role !== 'STUDENT') {
+        toast.error(msg);
+      }
     } finally {
       setLoading(false);
     }
